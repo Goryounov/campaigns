@@ -27,6 +27,7 @@ const pool = new Pool({
 const UserSchema = new mongoose.Schema({
   name: String,
   email: String,
+  password: Number,
   phone: String,
   token: String,
   telegram: String,
