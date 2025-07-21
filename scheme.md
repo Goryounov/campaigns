@@ -1,7 +1,6 @@
 
 ```mermaid
 graph TD
-    Admin["Admin"]
     User["User"]
     
     Campaign["Campaign"]
@@ -9,25 +8,18 @@ graph TD
     Channels["Channels"]
     SMS["SMS"]
     Telegram["Telegram"]
-    VK["VK"]
-    WhatsApp["WhatsApp"]
     
     Recipients["Recipients"]
     
-    Admin -->|"Create"| User
     User -->|"Create"| Campaign
     User -->|"Send"| Campaign
     
     Campaign -->|"Sending via"| Channels
     Channels --> SMS
     Channels --> Telegram
-    Channels --> VK
-    Channels --> WhatsApp
     
     SMS -->|"Delivering"| Recipients
     Telegram -->|"Delivering"| Recipients
-    VK -->|"Delivering"| Recipients
-    WhatsApp -->|"Delivering"| Recipients
     
     classDef actor fill:#f9d,stroke:#333,stroke-width:2px,color:black;
     classDef object fill:#9df,stroke:#333,stroke-width:2px,color:black;
