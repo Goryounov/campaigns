@@ -1,41 +1,40 @@
-const BaseChannel = require('./BaseChannel');
+const axios = require('axios')
+
+const BaseChannel = require('./BaseChannel')
 
 class TelegramChannel extends BaseChannel {
   constructor() {
-    super();
+    super()
 
-    this.botToken = 'telegram-bot-token-123456';
-    this.apiEndpoint = 'https://api.telegram.org/bot';
+    this.botToken = 'telegram-bot-token-123456'
+    this.apiEndpoint = 'https://api.telegram.org/bot'
   }
 
   getChannelName() {
-    return 'telegram';
+    return 'telegram'
   }
 
-  async send(username, message) {
-    console.log(`[Telegram] Sending to ${username}: ${message}`);
-
-    if (!username || typeof username !== 'string') {
-      throw new Error('Valid Telegram username is required');
-    }
+  async send(tg_id, text, parseMode) {
+    console.log(`[Telegram] Sending to ${tg_id}: ${text}`)
 
     try {
-      // Имитация работы с внешней системой
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      const success = Math.random() > 0.05;
-      if (!success) {
-        throw new Error('Telegram delivery failed');
-      }
+      await axios.post(
+        `${this.apiEndpoint}${this.botToken}/sendMessage`, 
+        {
+          chat_id: tg_id,
+          text: text,
+          parse_mode: parseMode
+        }
+      )
 
       return {
         ok: true
-      };
+      }
     } catch (error) {
-      console.error('Telegram error:', error);
-      throw error;
+      console.error('Telegram error:', error)
+      throw error
     }
   }
 }
 
-module.exports = TelegramChannel;
+module.exports = TelegramChannel
